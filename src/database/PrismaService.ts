@@ -1,3 +1,5 @@
+//atualização 'beforeExit' e ajustes 
+
 import { INestApplication, Injectable, OnModuleInit } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
@@ -7,11 +9,9 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
     await this.$connect();
   }
 
-
-
-  async enableShutdowHooks(app: INestApplication) {
-    this.$on('beforeExit', async () => {
-        await app.close();
+  async enableShutdownHooks(app: INestApplication) {
+    process.on('beforeExit', async () => {
+      await app.close();
     });
   }
-}  
+}

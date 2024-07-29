@@ -6,7 +6,7 @@ import { LivrosDTO } from './livros.dto';
 export class LivrosController {
   constructor(private readonly livrosService: LivrosService) {}
 
-@Post
+@Post()
 async create(@Body() data: LivrosDTO) {
   return this.livrosService.create(data);
 }
